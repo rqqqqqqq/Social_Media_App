@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+<div class="container">
+    <!-- creating a post header -->
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <h4> Hi {{ user}}, what would you like to post today? </h4>
+        </div>
+    </div>
+
+    <!-- displaying form for post -->
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <form method="POST" encytpe="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <!-- create a post button -->
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success mt-3">Post!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- displaying each post in post_list -->
+    {% for post in post_list %}
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <p><strong>{{ post.user }}</strong> {{ post.date_Post }}</p>
+            <div class="position-relative">
+                <!-- if youre posting an image -->
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="post-image" />
+                {% endif %}
+                <p>{{ post.text }}</p>
+                <!-- what is this for? -->
+                <a ref="url 'post-detail' post.pk%" class = stretched-link></a>
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

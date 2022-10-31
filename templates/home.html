@@ -1,0 +1,137 @@
+{% extends 'index.html' %}
+
+<style type="text/css">
+	.my-grid{
+		border: 1px solid black;
+	}
+	.my-grid-item{
+		border: 1px solid blue;
+	}
+</style>
+
+
+
+<!-- flexbox used for organise things into rows and columns inside the html file -->
+
+<!-- <div class="container"> -->
+	<!-- <a class="dropdown-item" href="{% url 'logout' %}">Logout</a> -->
+	<!-- create rows -->
+	<!-- <div class="my-grid d-flex flex-row justify-content-between"> -->
+	<!-- <div class="my-grid d-flex flex-row justify-content-end"> -->
+		<!-- <p class="my-grid-item m-auto">Item</p>
+		<p class="my-grid-item m-auto">Item</p>
+		<p class="my-grid-item m-auto">Item</p>
+		<p class="my-grid-item m-auto">Item</p>
+		<p class="my-grid-item m-auto">Item</p>
+	</div> -->
+
+	
+	<!-- create colums -->
+	<!-- <div class="my-grid d-flex flex-column mt-4">
+		<p class="my-grid-item mx-auto my-1 p-1">Item</p>
+		<p class="my-grid-item mx-auto my-1 p-1">Item</p>
+		<p class="my-grid-item mx-auto my-1 p-1">Item</p>
+		<p class="my-grid-item mx-auto my-1 p-1">Item</p>
+		<p class="my-grid-item mx-auto my-1 p-1">Item</p>
+	</div> -->
+
+
+	  <!-- <div class="grid-containor">
+		<div class="grid-x grid-margin-x">
+		  <div class="cell large-2"></div>
+		  <div class="large-8 cell">
+			
+			<div class="user-home-profile" id="user-home-profile-info">
+			  <h4> Hi {{ user}}, what would you like to post today? </h4>
+
+			  <!-- what is this line for? -->
+			  <!-- <a href="#" class='button' onclick="overlay()" id="create-post-button">create new post</a>
+			</div>
+	
+			<div id="overlay">
+			  <div class="callout">
+				<form action="/" method="post" enctype="multipart/form-data">
+				  {% csrf_token %}
+				  {{ post_form.as_p }}
+				  <button type="submit" class="button" id="new-post-button">post</button>
+				  <a href="#" onclick="overlay()" class="button alert" id="new-post-button">cancel</a>
+				</form>
+			  </div>
+			</div>
+		  </div>
+
+
+
+		  <div class="grid-containor">
+			<div class="grid-x grid-margin-x">
+			  <div class="cell large-6"></div>
+			  <div class="large-6 cell">
+				{% for post in posts %}
+				<div class="card">
+				  {% if post.media %}
+				  <img class="post-img" src="{{ post.media.url }}" >
+				  {% endif %}
+				  <div class="card-section">
+					<p>{{ post.text }} ({{ post.date_Post }})</p>
+				  </div>
+				</div>
+				{% endfor %}
+			  </div>
+			  <div class="auto cell"></div>
+			</div>
+		  </div>
+		  <div class="cell auto"></div>
+		</div>
+	  </div>
+	 -->
+<!-- </div>
+{#% endblock content %#} --> 
+
+
+
+
+
+
+
+
+
+{% block content %}
+<div class="container">
+    <!-- creating a post header -->
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <h4> Hi {{ user}}, what would you like to post today? </h4>
+        </div>
+    </div>
+
+    <!-- displaying form for post -->
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <form method="POST" encytpe="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <!-- create a post button -->
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success mt-3">Post!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- displaying each post in post_list -->
+    {% for post in post_list %}
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <p><strong>{{ post.user }}</strong> {{ post.date_Post }}</p>
+            
+                <!-- if youre posting an image -->
+                {% if post.image %}
+                <img src="{{post.image.url}}" class="post-image" />
+                {% endif %}
+                <p>{{post.text }}</p>
+            
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

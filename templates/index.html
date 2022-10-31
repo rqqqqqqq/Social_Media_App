@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    
+    <!-- import stylesheet from bootstrap.min.css file in static_cdn folder -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"> 
+
+    <!-- loading icons from google webpage -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons"
+        rel="stylesheet"> 
+    
+    
+        <title>Landing Page</title>
+</head>
+<body>
+    <h1> Social Media App </h1>
+
+    <!-- Header -->
+    {% include 'snippets/header.html' %}
+    {% include 'snippets/home_css.html' %}
+    {% include 'snippets/home_js.html' %}
+
+    <!-- Ensures that footer stays at the bottom of webpage -->
+    <style type = 'text/css'>
+        .main{
+            min-height:100vh;
+            height: 100%;
+        }
+    </style>
+
+    <!-- Main Body -->
+    <div class="main block">
+        {% block content %} 
+
+        {% endblock content %} 
+    </div>
+
+    <!-- Footer -->
+    {% include 'snippets/footer.html' %}
+    
+    <!-- using javascript files from bootstrap -->
+    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script> 
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

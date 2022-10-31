@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+<div class="container">
+    <!-- creating a post header -->
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+
+            What chat room would you like to enter?<br>
+            <input id="room-name-input" type="text" size="100"><br>
+            <input id="room-name-submit" type="button" value="Enter">
+            <script>
+                document.querySelector('#room-name-input').focus();
+                document.querySelector('#room-name-input').onkeyup = function (e) {
+                    if (e.keyCode === 13) {  // enter, return
+                        document.querySelector('#room-name-submit').click();
+                    }
+                };
+
+                document.querySelector('#room-name-submit').onclick = function (e) {
+                    var roomName = document.querySelector('#room-name-input').value;
+                    window.location.pathname = '/chat/' + roomName;
+                };
+            </script>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
